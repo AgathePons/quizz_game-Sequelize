@@ -22,7 +22,6 @@ class Level extends CoreModel {
         levels.push(level);
       }
       return levels;
-      console.log(levels);
     } catch (err) {
       console.error('Error:', err);
     }
@@ -70,7 +69,7 @@ class Level extends CoreModel {
   }
 
   // update level
-  async insert() {
+  async update() {
     const query = {
       // je demande à la base de données de me retourner l'id généré
       // on peut demander plus que que l'id, je pourrais ajouter le name...
