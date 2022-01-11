@@ -140,3 +140,19 @@ class Tag … {
 Dans le `CoreModel` passer la propriété `id` en propriété privée, puis ajouté un accesseur permettant de lire cette propriété. Cela aura pour effet de ne pas permettre la modification manuelle de celle-ci.
 
 Puis rechercher des modèles qui auraient potentiellement besoin d'un accesseur (getter) afin de faciliter la récupération d'informations composites.
+
+## Jour 1 : Active Record
+
+Les méthodes Active Record du modèle `Level` ont été codées.
+
+On a pu vérifier que ces méthodes fonctionnent en jouant dans `test.js`.
+
+En s'inspirant (très largement) de ce code existant, on passe à la suite, à savoir coder les méthodes Active Record du modèle `User` :
+
+- `findAll()`, qui trouve tous les Users dans la base de données.
+- `findById(id)`, qui trouve un User en fonction de son ID.
+- `insert()`, qui insert l'instance courante dans la base de données.
+- `update()`, qui met à jour l'instance courante dans la base de données.
+- `delete()`, qui supprime l'instance courante de la base de données.
+
+En bonus, commencer à réfléchir pour factoriser tout ce code (c'est-à-dire coder toutes les méthodes Active Record 

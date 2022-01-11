@@ -11,10 +11,10 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
-app.use(express.static(path.join(__dirname, './assets')))
+app.use(express.static(path.join(__dirname, './assets')));
 
 app.use(router);
 
-app.listen(port, _ => {
-   console.log(`http://localhost:${port}`);
+app.listen(port,() => {
+  console.log(`http://localhost:${port}`);
 });
