@@ -6,12 +6,12 @@ const test = async () => {
   // All users (static)
   const allUsers = await User.findAll();
   //!
-  //console.log('all users');
-  //console.table(allUsers);
+  console.log('all users:');
+  console.table(allUsers);
   // One user (static)
-  const oneUser = await User.findById(5);
+  const oneUser = await User.findById(1);
   //!
-  //console.log('one user', oneUser);
+  console.log('user id:1', oneUser);
 
   // Insert new user (not static)
   const userTest = new User({
@@ -27,12 +27,12 @@ const test = async () => {
   // Update userTest
   userTest.firstname = 'Nadou';
   await userTest.update();
-  //!
-  console.log('Update user:', userTest);
+  
   const allUsersNow1 = await User.findAll();
-  console.log('ALL USERS FROM DB (before delete the user):');
+  //!
+  console.log('ALL USERS FROM DB (before delete but after update):');
   console.table(allUsersNow1);
-  // Delete le user qu'on vient de créé
+
   await userTest.delete();
 
   // Delete users Honoré et Victor
