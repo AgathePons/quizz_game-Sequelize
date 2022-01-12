@@ -100,5 +100,5 @@ class User extends CoreModel {
     }
   }
 }
-
+// refacto incoming
 module.exports = User;
