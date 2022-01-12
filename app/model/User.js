@@ -7,6 +7,8 @@ class User extends CoreModel {
   email;
   password;
 
+  static tableName = "user";
+
   constructor(obj) {
     super(obj);
     this.firstname = obj.firstname;
@@ -16,7 +18,7 @@ class User extends CoreModel {
   }
 
   //get all
-  static async getAllUsers() {
+  /* static async getAllUsers() {
     const query = 'SELECT * FROM "user"';
 
     try {
@@ -31,10 +33,10 @@ class User extends CoreModel {
     } catch(err) {
       console.log('Error:', err);
     }
-  }
+  } */
 
   //get one
-  static async getOneUser(id) {
+  /* static async getOneUser(id) {
     const query = {
       text: 'SELECT * FROM "user" WHERE id=$1',
       values: [id]
@@ -47,10 +49,10 @@ class User extends CoreModel {
     } catch(err) {
       console.error('Error:', err);
     }
-  }
+  } */
 
   //insert new user
-  async insert() {
+  /* async insert() {
     const query = {
       text: `INSERT INTO "user" ("firstname", "lastname", "email", "password") 
       VALUES ($1, $2, $3, $4)
@@ -67,7 +69,7 @@ class User extends CoreModel {
     } catch(err) {
       console.error('Error', err);
     }
-  }
+  } */
 
   //update user
   async update() {
@@ -86,7 +88,7 @@ class User extends CoreModel {
   }
 
   //delete user
-  async delete() {
+  /* async delete() {
     const query = {
       text: 'DELETE FROM "user" WHERE id=$1',
       values: [this.id]
@@ -98,7 +100,7 @@ class User extends CoreModel {
     } catch(err) {
       console.error('Error:', err);
     }
-  }
+  } */
 }
 // refacto incoming
 module.exports = User;

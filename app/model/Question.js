@@ -9,6 +9,8 @@ class Question extends CoreModel{
     level_id;
     answer_id;
 
+    static tableName = "question";
+
     constructor(obj){
         super(obj);
         this.wiki=obj.wiki;

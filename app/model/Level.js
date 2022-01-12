@@ -4,13 +4,15 @@ const CoreModel = require('./CoreModel');
 class Level extends CoreModel {
   name;
 
+  static tableName = "level";
+
   constructor(obj) {
     super(obj);
     this.name = obj.name;
   }
 
   // get all levels
-  static async getAllLevels() {
+  /* static async getAllLevels() {
     const query = 'SELECT * FROM level';
 
     try {
@@ -25,10 +27,10 @@ class Level extends CoreModel {
     } catch (err) {
       console.error('Error:', err);
     }
-  }
+  } */
 
   // get one level
-  static async getOneLevel(id) {
+  /* static async getOneLevel(id) {
     const query = 'SELECT * FROM level WHERE id=$1';
     const values = [id];
 
@@ -43,10 +45,10 @@ class Level extends CoreModel {
     } catch (err) {
       console.error('Error:', err);
     }
-  }
+  } */
 
   // insert new level
-  async insert() {
+  /* async insert() {
     const query = {
       // je demande à la base de données de me retourner l'id généré
       // on peut demander plus que que l'id, je pourrais ajouter le name...
@@ -66,7 +68,7 @@ class Level extends CoreModel {
     } catch (err) {
       console.error(err);
     }
-  }
+  } */
 
   // update level
   async update() {
@@ -92,7 +94,7 @@ class Level extends CoreModel {
   }
 
     // delete
-    async delete() {
+    /* async delete() {
       const query = {
         text: `DELETE FROM level WHERE id=$1`,
         values: [this.id]
@@ -103,7 +105,7 @@ class Level extends CoreModel {
       } catch (err) {
         console.error(err);
       }
-    }
+    } */
   }
 
   module.exports = Level;

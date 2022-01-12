@@ -1,9 +1,12 @@
+const Quiz = require('../model/Quiz');
+
 const mainController = {
 
-    homePage(req, res) {
-        res.render('home');
-    }
-
-}
+  async homePage(req, res) {
+    const quizArray = await Quiz.findAll();
+    console.table(quizArray);
+    res.render('home', quizArray);
+  }
+};
 
 module.exports = mainController;

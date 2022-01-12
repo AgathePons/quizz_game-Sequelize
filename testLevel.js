@@ -11,8 +11,8 @@ const Level = require('./app/model/Level');
 
 const test = async () => {
   // Méthodes globales (static)
-  const allLevels = await Level.getAllLevels();
-  const level2 = await Level.getOneLevel(2);
+  const allLevels = await Level.findAll();
+  const level2 = await Level.findById(1);
   console.log(allLevels);
   console.log(level2);
 
@@ -22,28 +22,24 @@ const test = async () => {
   const levelMoyen = new Level({
     name: 'Moyen'
   });
-  levelMoyen.insert();
+  await levelMoyen.insert();
 
   // On veut ajouter un niveau moyen
   const levelIntermediaire = new Level({
     name: 'Intermédiaire'
   });
-  levelIntermediaire.insert();
+  await levelIntermediaire.insert();
 
   // On veut suppr niveau moyen et intermédiaire
 
   // je récupère à nouveau les niveaux après l'insertion de deux niveaux
-  const allLevelsTEMP = await Level.getAllLevels();
+  const allLevelsTEMP = await Level.findAll();
   console.log('après insert() et avant delete()',allLevelsTEMP);
 
-  // Exercice : je veux supprimer le niveau moyen et le niveau intermédiaire
-  for (const level of allLevelsTEMP) {
-    // Si c'est "Moyen" ou "Intermédiaire", je supprime le niveau
-    if (level.name == 'Moyen' || level.name == 'Intermédiaire') {
-      await level.delete();
-    }
-  }
-  const allLevelsTEMP2 = await Level.getAllLevels();
+  await levelMoyen.delete();
+  await levelIntermediaire.delete();
+
+  const allLevelsTEMP2 = await Level.findAll();
   console.log('après insert() et après delete()', allLevelsTEMP2);
 };
 
