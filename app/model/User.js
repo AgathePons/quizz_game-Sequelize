@@ -61,8 +61,6 @@ class User extends CoreModel {
     try {
       const result = await client.query(query);
       //!
-      console.log('result:', result.rows[0]);
-      console.log('this before:', this)
       if(result.rows.length > 0) {
         this.id = result.rows[0].id;
       }
@@ -74,17 +72,14 @@ class User extends CoreModel {
   //update user
   async update() {
     const query = {
-      text: `UPDATE "user" SET "firstname"='$1' WHERE id=$2`,
-      values: [this.firstname, this.id]
+      text: `UPDATE "user" SET "firstname"=$1,"lastname"=$2,"email"=$3,"password"=$4 WHERE id=$5`,
+      values: [this.firstname,this.lastname, this.email, this.password, this.id]
     };
     try {
       //!
-      console.log('before:', this);
-      const result = await client.query(query);
-      if(result.rows.length > 0) {
-        this.id = result.rows[0].id;
-      }
-      console.log('after', this);
+      //console.log('before:', this);
+      await client.query(query);
+      //console.log('after', this);
     } catch(err) {
       console.error('Error:', err);
     }

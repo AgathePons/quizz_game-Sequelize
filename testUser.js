@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const Level = require('./app/model/Level');
 const User = require('./app/model/User');
 
 const test = async () => {
@@ -15,36 +14,37 @@ const test = async () => {
 
   // Insert new user (not static)
   const userTest = new User({
-    firstname: 'Marcel',
-    lastname: 'Proust',
-    email: 'proustoux-du-37@wanadoo.fr',
-    password:'madelaine123'
+    firstname: 'Nadège',
+    lastname: 'Monbroult',
+    email: 'nadoudou@wanadoo.fr',
+    password:'azerty'
   });
-  //userTest.insert();
+  await userTest.insert();
   //!
   console.log('new user:', userTest);
 
   // Update userTest
-  userTest.firstname = 'Marcèle';
-  userTest.update();
+  userTest.firstname = 'Nadou';
+  await userTest.update();
   //!
   console.log('Update user:', userTest);
   const allUsersNow1 = await User.getAllUsers();
-  console.log('ALL USERS FROM DB:', allUsersNow1);
+  console.log('ALL USERS FROM DB (before delete the user):');
+  console.table(allUsersNow1);
+  // Delete le user qu'on vient de créé
+  await userTest.delete();
 
   // Delete users Honoré et Victor
   const allUsersNow = await User.getAllUsers();
   for(const user of allUsersNow) {
-    if(user.firstname === 'Victor' || user.firstname === 'Honoré') {
+    if(user.firstname === 'test' || user.firstname === 'Honoré') {
       await user.delete();
     }
   }
   const allUsersAfterDelete = await User.getAllUsers();
   //!
-  //console.log('users after delete:', allUsersAfterDelete);
-
-  
-
+  console.log('users after delete:');
+  console.table(allUsersAfterDelete);
 
 };
 
