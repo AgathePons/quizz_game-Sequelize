@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database');
 
-class Quiz extends Sequelize.Model{};
+class Quiz extends Sequelize.Model{}
 
 Quiz.init(
   {

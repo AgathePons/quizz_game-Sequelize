@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database');
 
-class User extends Sequelize.Model {};
+class User extends Sequelize.Model {}
 
 User.init({
   // define columns

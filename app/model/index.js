@@ -1,3 +1,4 @@
+// On require tous les models
 const Level = require('./level');
 const Answer = require('./answer');
 const Quiz = require('./quiz');
