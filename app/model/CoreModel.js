@@ -190,5 +190,5 @@ class CoreModel {
     }
   }
 }
-
+// TEST
 module.exports = CoreModel;
