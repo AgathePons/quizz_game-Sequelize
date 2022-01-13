@@ -21,8 +21,21 @@ const test = async () => {
   console.log('all levels:');
   console.table(allLevels);
 
-  const test = Level.findBy({name: 'Expert'});
-  console.log(test);
+  const test = await Level.findBy({name: 'Très difficile'});
+  console.log('résultat du find by:')
+  console.table(test);
+
+  const levelVeryHard = new Level({
+    name: 'Verry hard'
+  });
+  await levelVeryHard.save();
+  console.log('test save (insert):');
+  console.table(await Level.findAll());
+
+  levelVeryHard.name = 'Very hard';
+  await levelVeryHard.save();
+  console.log('test save (update):');
+  console.table(await Level.findAll());
 };
 
 test();

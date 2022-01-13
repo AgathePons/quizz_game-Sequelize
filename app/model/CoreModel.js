@@ -61,21 +61,34 @@ class CoreModel {
   };
 
   static async findBy(params) {
-    const property = Object.keys(params);
-    console.log('PROPERTY:', property);
+    const columns= [];
+    const values = [];
+    let counter = 1;
+    for(const param in params) {
+      columns.push(param + '=$' + counter);
+      values.push(params[param]);
+      counter++;
+    }
+    const query = {
+      text: `SELECT * FROM "${this.tableName}" WHERE ${columns.join(" AND ")}`,
+      values: values
+    };
+    //!
     console.log('this:', this);
     console.log('this.tableName:', this.tableName);
-    console.log('this.name', this.name);
-    console.log('this[property]', this.property);
-    console.log('this.constructor:', this.constructor);
-    console.log('this.constructor.tableName', this.constructor.tableName);
-    console.log('this.constuctor.properties', this.constructor.property);
-    console.log('find by:', property);
-    const query = {
-      text: `SELECT * FROM "${this.tableName}" WHERE ${property}=$1`,
-      values: [this[property]]
-    };
     console.log(query);
+    try {
+      const result = await client.query(query)
+
+      const results = [];
+      for(const row of result.rows) {
+        const obj = new this(row);
+        results.push(obj);
+      }
+      return results;
+    } catch(err) {
+      console.error("FIND =>", err);
+    }
   };
 
   // ----------- NOT STATIC ----------- //
@@ -164,6 +177,16 @@ class CoreModel {
       await client.query(query);
     } catch (err) {
       console.error("UPDATE =>", err);
+    }
+  }
+
+  // ----------- SAVE ----------- //
+  async save() {
+    // si il n'y a pas d'id (càd que l'instance a été crée mais pas insérée vu qu'on crée l'id au insert)
+    if(!this.id) {
+      this.insert();
+    } else {
+      this.update();
     }
   }
 }
