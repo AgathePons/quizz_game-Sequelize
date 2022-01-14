@@ -1,15 +1,27 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const {Answer, Level, Question, Quiz, Tag, User} = require('../models');
-const dataController = require('./dataController');
+const {
+  Answer,
+  Level,
+  Question,
+  Quiz,
+  Tag,
+  User
+} = require('../models');
 
 const quizController = {
   async displayQuiz (req, res) {
-    const id = req.params.id;
-    const oneQuiz = await dataController.getOneQuiz(id);
-    //const questionsOfQuiz = await dataController.getQuestionsByQuiz(id);
-    
+    const quizId = req.params.id;
+    const oneQuiz = await Quiz.findOne({
+      where: {
+        id: quizId
+      },
+      include: ['tags', 'author', {
+        association: 'questions',
+        include: ['level', 'answers', 'good_answer']
+      }]
+    });
     
     res.render('quizz', {
       oneQuiz,
