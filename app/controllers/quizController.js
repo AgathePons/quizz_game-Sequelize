@@ -20,6 +20,7 @@ const quizController = {
     
     res.render('quizz', {
       oneQuiz,
+      userSession: res.locals.session
     });
   },
 };

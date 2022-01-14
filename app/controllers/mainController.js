@@ -6,16 +6,20 @@ const {
 } = require('../models');
 
 const mainController = {
-
+  async checkLogin(req, res, next) {
+    res.locals.session = req.session.login;
+    console.log('MIDDLEWARE');
+    console.log('middleware',res.locals.session);
+    next();
+  },
   async homePage(req, res) {
     const allQuizs = await Quiz.findAll({
       include: 'author'
     });
-    console.log('homepage controller',req.session.login);
-    const userSession = req.session.login
+    //const userSession = req.session.login;
     res.render('homepage', {
       allQuizs,
-      userSession
+      userSession: res.locals.session
     });
   }
 };

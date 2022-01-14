@@ -22,7 +22,6 @@ const loginController = {
     console.log(user);
     if(user){
         req.session.login = user;
-        console.log(req.session.login);
     }
     res.redirect('/');
   }

@@ -25,9 +25,11 @@
             <a class="p-2 text-white" href="/">Accueil</a>
             <a class="p-2 text-white" href="/tags">Sujets</a>
             <a class="p-2 text-white" href="/signup">S'inscrire</a>
-            <a class="p-2 text-white" href="/login">Se connecter</a>
-            <% if(locals.userSession) {%>
-            <h2>Pouet</h2>
-            <%}%>
+            
+            <% if(!locals.session) {%>
+                <a class="p-2 text-white" href="/login">Se connecter</a>
+            <%} else {%>
+                <p class="p-2 text-white">Bonjour <%=locals.session.firstname%></p>
+            <% }%>
         </nav>
     </header>

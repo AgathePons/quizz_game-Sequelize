@@ -6,7 +6,7 @@ const signupController = require('./controllers/signupController');
 const loginController = require('./controllers/loginController');
 
 const router = express.Router();
-
+router.use(mainController.checkLogin);
 router.get('/', mainController.homePage);
 router.get('/quiz/:id', quizController.displayQuiz);
 router.get('/tags', tagController.displayTags);
