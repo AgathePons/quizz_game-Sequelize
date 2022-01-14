@@ -11,8 +11,11 @@ const mainController = {
     const allQuizs = await Quiz.findAll({
       include: 'author'
     });
+    console.log('homepage controller',req.session.login);
+    const userSession = req.session.login
     res.render('homepage', {
-      allQuizs
+      allQuizs,
+      userSession
     });
   }
 };

@@ -14,5 +14,6 @@ router.get('/tags/:id', tagController.displayQuizByTag);
 router.get('/signup', signupController.signupPage);
 router.post('/signup', signupController.newUser);
 router.get('/login', loginController.loginPage);
+router.post('/login', loginController.postLogin);
 
 module.exports = router;
