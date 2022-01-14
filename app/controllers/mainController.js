@@ -1,10 +1,12 @@
-
+const dataController = require('./dataController');
 
 const mainController = {
 
   async homePage(req, res) {
-    
-    res.render('home');
+    const allQuizs = await dataController.getAllQuizs();
+    res.render('homepage', {
+      allQuizs
+    });
   },
 
   async displayQuiz(req, res) {
