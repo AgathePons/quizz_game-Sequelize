@@ -7,10 +7,6 @@ const mainController = {
     res.render('homepage', {
       allQuizs
     });
-  },
-
-  async displayQuiz(req, res) {
-    
   }
 };
 
