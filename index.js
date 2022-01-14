@@ -11,6 +11,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, './integration')));
 
 app.use(router);

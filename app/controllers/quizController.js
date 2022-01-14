@@ -2,12 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const {
-  Answer,
-  Level,
-  Question,
   Quiz,
-  Tag,
-  User
 } = require('../models');
 
 const quizController = {
