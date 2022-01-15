@@ -3,15 +3,15 @@ const {
 } = require('../models');
 
 const signupController = {
-
-  async signupPage(req, res) {
-    
+  // display signup page
+  async signupPage(_req, res) {
     res.render('signup');
   },
-  async newUser(req, res, next) {
+  // method post to signup
+  async newUser(req, res) {
     console.log(req.body);
     if(req.body.password === req.body.passwordConfirm) {
-      const newUser = await User.create({
+      await User.create({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,

@@ -1,11 +1,11 @@
 const dotenv = require('dotenv');
 dotenv.config();
-
 const {
   Quiz,
 } = require('../models');
 
 const quizController = {
+  // display page of one quizz
   async displayQuiz (req, res) {
     const quizId = req.params.id;
     const oneQuiz = await Quiz.findOne({
@@ -17,10 +17,8 @@ const quizController = {
         include: ['level', 'answers', 'good_answer']
       }]
     });
-    
     res.render('quizz', {
       oneQuiz,
-      userSession: res.locals.session
     });
   },
 };

@@ -16,10 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
   // doc express-session : npmjs.com/package/express-session
-  // secret: generate the tokens
   secret: process.env.SECRET_KEY,
   // session auto save at the end of the request
-  resave: false,
+  resave: true,
   // even if empty, save the session
   saveUninitialized: true,
   cookie : {

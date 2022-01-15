@@ -8,7 +8,7 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
  * Test des relations
  */
 
-  /* User <-> Quiz */
+/* User <-> Quiz */
 // User.findAll({
 //   include: ['quizList']
 // }).then( (users) => {
@@ -19,7 +19,7 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
 
 
 
-  /* Quiz <-> Question */
+/* Quiz <-> Question */
 // Quiz.findByPk(1,{
 //   include: ["questions"]
 // }).then( (quiz) => {
@@ -35,7 +35,7 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
 
 
 
-  /* Question <-> Answer */
+/* Question <-> Answer */
 //  Question.findByPk(1,{
 //    include: ["answers", "good_answer"]
 //  }).then( (question) => {
@@ -54,7 +54,7 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
 
 
 
-  /* Question <-> Level */
+/* Question <-> Level */
 // Question.findByPk(1,{
 //   include: ["level"]
 // }).then( (question) => {
@@ -69,7 +69,7 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
 // });
 
 
-  /* Quiz <-> Tag */
+/* Quiz <-> Tag */
 // Quiz.findByPk(1,{
 //   include: ["tags"]
 // }).then( (quiz) => {
@@ -86,17 +86,17 @@ const {Answer, Level, Question, Quiz, Tag, User} = require('./app/models');
 // });
 
 
-  /* Tag -> Question -> User */
-Tag.findByPk(1,{
-  include: [{
-    association: "quizList",
-    include: ["author"]
-  }]
-}).then( (tag) => {
-  let message = '';
-  for (let quiz of tag.quizList) {
-    message += `${quiz.title}, écrit par ${quiz.author.fullname}\n`;
-  }
+/* Tag -> Question -> User */
+// Tag.findByPk(1,{
+//   include: [{
+//     association: "quizList",
+//     include: ["author"]
+//   }]
+// }).then( (tag) => {
+//   let message = '';
+//   for (let quiz of tag.quizList) {
+//     message += `${quiz.title}, écrit par ${quiz.author.fullname}\n`;
+//   }
 
-  console.log( `${tag.name} concerne : \n`+message );
-});
+//   console.log( `${tag.name} concerne : \n`+message );
+// });

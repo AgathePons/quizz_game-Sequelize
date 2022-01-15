@@ -4,9 +4,12 @@ const quizController = require('./controllers/quizController');
 const tagController = require('./controllers/tagController');
 const signupController = require('./controllers/signupController');
 const loginController = require('./controllers/loginController');
+const middleware = require('./controllers/middleware');
 
 const router = express.Router();
-router.use(mainController.checkLogin);
+
+router.use(middleware.checkLogin); // pass user session infos to all
+
 router.get('/', mainController.homePage);
 router.get('/quiz/:id', quizController.displayQuiz);
 router.get('/tags', tagController.displayTags);

@@ -1,42 +1,40 @@
 <%- include('partials/header') %>
-    <main class="container">
+<main class="container">
 
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h2 class="h1 display-4"><%=oneQuiz.title %></h2>
-            <p class="lead"><%=oneQuiz.description %></p>
-            <p class="font-weight-bold">par <%=oneQuiz.author.firstname %> <%=oneQuiz.author.lastname %></p>
-            <p class="lead"><%=oneQuiz.questions.length%> questions</p>
-        </div>
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4"><%=oneQuiz.title %></h2>
+    <p class="lead"><%=oneQuiz.description %></p>
+    <p class="font-weight-bold">par <%=oneQuiz.author.firstname %> <%=oneQuiz.author.lastname %></p>
+    <p class="lead"><%=oneQuiz.questions.length%> questions</p>
+  </div>
 
-        <div class="row">
-            <%for(const tag of oneQuiz.tags){%>
-            <div class="col-3 p-4 text-center">
-                <a class="btn btn-block btn-lg tag tag--<%=tag.name.toLowerCase()%>" href="/tags/<%=tag.id%>">
-                    <%=tag.name%>
-                </a>
-            </div>
-            <% } %>
+  <div class="row">
+    <!-- one div col-3 for each tag of the quiz -->
+    <%for(const tag of oneQuiz.tags){%>
+    <div class="col-3 p-4 text-center">
+      <a class="btn btn-block btn-lg tag tag--<%=tag.name.toLowerCase()%>" href="/tags/<%=tag.id%>">
+        <%=tag.name%>
+      </a>
+    </div>
+    <% } %>
+  </div>
 
-        </div>
+  <div class="row">
+    <!-- one div col-12 for each question of the quiz -->
+    <%for(const question of oneQuiz.questions){%>
+    <div class="col-12">
+      <label class="badge level level--<%=question.level.name.toLowerCase()%>"><%=question.level.name%></label>
+      <h4>
+        <%=question.question %>
+      </h4>
+      <ul>
+        <% for(const answer of question.answers){ %>
+        <li><%= answer.description %></li>
+        <% } %>
+      </ul>
+    </div>
+    <% } %>
+  </div>
 
-        <div class="row">
-
-        <%for(const question of oneQuiz.questions){%>
-            <div class="col-12">
-              
-                <label class="badge level level--<%=question.level.name.toLowerCase()%>"><%=question.level.name%></label>
-                <h4>
-                    <%=question.question %>
-                </h4> 
-                <ul>
-                    <% for(const answer of question.answers){ %>
-                    <li><%= answer.description %></li>
-                    <% } %>
-                </ul>
-            </div>
-            <% } %>
-        </div>
-
-
-    </main>
-    <%- include('partials/footer') %>
+</main>
+<%- include('partials/footer') %>

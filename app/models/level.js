@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../database');
 
 // Maintenant, nos modèles héritent du "Model" de sequelize, et non plus de notre CoreModel.
-class Level extends Sequelize.Model {};
+class Level extends Sequelize.Model {}
 
 /**
  * Nécessaire, requis par Sequelize
@@ -16,7 +16,7 @@ Level.init({
 },{
   // le 2ème paramètre contient les options de connections
   sequelize, // le connecteur
-  tableName: "level", // nom de la table
+  tableName: 'level' // nom de la table
 });
 
 // on exporte la class directement !

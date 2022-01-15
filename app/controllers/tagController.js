@@ -1,17 +1,18 @@
 const dotenv = require('dotenv');
 dotenv.config();
-
 const {
   Tag
 } = require('../models');
 
 const tagController = {
-  async displayTags(req, res) {
+  // display tag page
+  async displayTags(_req, res) {
     const allTags = await Tag.findAll();
     res.render('tags', {
       allTags
     });
   },
+  // display list of quizs for one tag
   async displayQuizByTag(req, res) {
     const tagId = req.params.id;
     const oneTag = await Tag.findOne({
@@ -23,7 +24,6 @@ const tagController = {
         include: 'author'
       }
     });
-    console.log(oneTag);
     res.render('tag', {
       oneTag
     });
