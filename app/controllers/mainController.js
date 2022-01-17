@@ -7,9 +7,15 @@ const {
 const mainController = {
   // display homepage with list of all quizs
   async homePage(_req, res) {
-    const allQuizs = await Quiz.findAll({
-      include: 'author'
-    });
+    let allQuizs = [];
+    try {
+      allQuizs = await Quiz.findAll({
+        include: 'author'
+      });
+    } catch(err) {
+      console.log('HOME =>', err);
+      //res.status(500).send(err);
+    }
     res.render('homepage', {
       allQuizs,
     });
