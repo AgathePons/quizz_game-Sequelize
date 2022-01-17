@@ -15,15 +15,12 @@ app.set('views', './app/views');
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-  // doc express-session : npmjs.com/package/express-session
   secret: process.env.SECRET_KEY,
-  // session auto save at the end of the request
-  resave: true,
-  // even if empty, save the session
-  saveUninitialized: true,
+  resave: true,// permet de gérer automatiquement l'enregistrement de notre session
+  saveUninitialized: true,// permet de gérer les sessions des visiteurs non inscrits
   cookie : {
     secure: false,
-    maxAge: (1000*60*60) // ça fait une heure
+    maxAge: (1000*60*60) // ms * sec * min = 1h
   }
 }));
 

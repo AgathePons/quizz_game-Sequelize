@@ -8,7 +8,7 @@ const middleware = require('./controllers/middleware');
 
 const router = express.Router();
 
-router.use(middleware.checkLogin); // pass user session infos to all
+router.use(middleware.setLocals); // pass user session infos to all
 
 router.get('/', mainController.homePage);
 router.get('/quiz/:id', quizController.displayQuiz);
@@ -18,5 +18,6 @@ router.get('/signup', signupController.signupPage);
 router.post('/signup', signupController.newUser);
 router.get('/login', loginController.loginPage);
 router.post('/login', loginController.postLogin);
+router.get('/logout', loginController.logout);
 
 module.exports = router;
