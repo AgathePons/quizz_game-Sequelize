@@ -1,5 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const {
   Tag
 } = require('../models');

@@ -4,7 +4,7 @@ const {
   User,
 } = require('../models');
 
-const signupController = {
+const userController = {
   // display signup page
   async signupPage(_req, res) {
     res.render('signup');
@@ -61,10 +61,42 @@ const signupController = {
       console.log('SIGNUP POST METHOD =>', err);
       //res.status(500).send(err);
     }
+  },
+  // display login page
+  async loginPage(_req, res) {
+    res.render('login');
+  },
+  // method post to login
+  async postLogin(req, res) {
+    const formContent = req.body;
+    const user = await User.findOne({
+      where: {
+        email: formContent.email,
+        //password: req.body.password
+      }
+    });
+    if(user) {
+      if(await bcrypt.compare(formContent.password, user.password)) {
+        setSession(req, user);
+        res.redirect('/');
+      } else {
+        res.render('login', {
+          error: 'il y a une erreur dans le couple login/mdp'
+        });
+      }
+    } else {
+      res.render('login', {
+        error: 'il y a une erreur dans le couple login/mdp'
+      });
+    }
+  },
+  logout(req, res) {
+    req.session.user = null;
+    res.redirect('/');
   }
 };
 
-module.exports = signupController;
+module.exports = userController;
 
 const setSession = (req, newUser) => {
   req.session.user = {

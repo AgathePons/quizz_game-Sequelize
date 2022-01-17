@@ -7,12 +7,16 @@ const User = require('./user');
 
 // une question a plusieurs answers
 Question.hasMany(Answer, {
+  onDelete: 'cascade',
+  hooks: true,
   foreignKey: 'question_id',
   as: 'answers'
 });
 
 // réciproque : une answer est lié à une seule question
 Answer.belongsTo(Question, {
+  onDelete: 'cascade',
+  hooks: true,
   foreignKey: 'question_id',
   as: 'question'
 });
@@ -20,6 +24,8 @@ Answer.belongsTo(Question, {
 // ATTENTION cas particulier : Question et Answer sont liés de 2 manières différentes!
 // en effet, il y a aussi "la bonne réponse" !
 Question.belongsTo(Answer, {
+  onDelete: 'cascade',
+  hooks: true,
   foreignKey: 'answer_id',
   as: 'good_answer'
 });
@@ -52,6 +58,8 @@ User.hasMany(Quiz, {
 
 // Question : "un Quiz possède plusieurs Questions"
 Quiz.hasMany(Question, {
+  onDelete: 'cascade',
+  hooks: true,
   foreignKey: 'quiz_id',
   as: 'questions'
 });

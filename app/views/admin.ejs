@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<main class="container">
+  <% if(locals.session.role) { %>
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4">Page d'administration</h2>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <div class="accordion" id="accordionExample">
+        <% for(const quiz of allQuizs){%>
+          <div class="card">
+            <div class="card-header" id="heading-<%= quiz.id %>">
+              <h2 class="mb-0 d-flex">
+                <button class="btn btn-link text-left mr-auto" type="button" data-toggle="collapse" data-target="#quiz-<%= quiz.id %>" aria-expanded="true" aria-controls="quiz-<%= quiz.id %>">
+                  <%= quiz.title %>
+                </button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="#" type="button" class="btn btn-primary text-white">Edit</a>
+                  <a href="/admin/quiz/delete/<%= quiz.id %>" type="button" class="btn btn-danger text-white">Delete</a>
+                </div>
+              </h2>
+            </div>
+            <div id="quiz-<%= quiz.id %>" class="collapse" aria-labelledby="heading-<%= quiz.id %>" data-parent="#accordionExample">
+              <div class="card-body">
+                <%= quiz.description %>
+              </div>
+            </div>
+          </div>
+          
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</main>
+<%- include('partials/footer') %>
