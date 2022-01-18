@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
 <main class="container">
-  <% if(locals.session.role) { %>
+  <% if(locals.session) { %>
+    <% if(locals.session.role === 'admin') { %>
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h2 class="h1 display-4">Page d'administration</h2>
   </div>
@@ -32,6 +33,11 @@
       </div>
     </div>
   </div>
+  <% } %>
+  <% } else { %>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h2 class="h1 display-4">Vous n'êtes pas admin</h2>
+    </div>
   <% } %>
 </main>
 <%- include('partials/footer') %>

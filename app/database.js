@@ -11,7 +11,9 @@ const sequelize = new Sequelize(process.env.PG_URL, {
   define: {
     updatedAt: 'updated_at',
     createdAt: 'created_at'
-  }
+  },
+  // disable logging; default: console.log
+  logging: false
 });
 
 module.exports = sequelize;

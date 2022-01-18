@@ -5,9 +5,11 @@ class Answer extends Sequelize.Model {}
 
 Answer.init({
   description: Sequelize.STRING,
+  isGoodAnswer: Sequelize.BOOLEAN
 },{
   sequelize,
-  tableName: 'answer'
+  tableName: 'answer',
+  underscored: true
 });
 
 module.exports = Answer;

@@ -8,7 +8,7 @@ const User = require('./user');
 // une question a plusieurs answers
 Question.hasMany(Answer, {
   onDelete: 'cascade',
-  hooks: true,
+  /* hooks: true, */
   foreignKey: 'question_id',
   as: 'answers'
 });
@@ -16,19 +16,19 @@ Question.hasMany(Answer, {
 // réciproque : une answer est lié à une seule question
 Answer.belongsTo(Question, {
   onDelete: 'cascade',
-  hooks: true,
+  /* hooks: true, */
   foreignKey: 'question_id',
   as: 'question'
 });
 
 // ATTENTION cas particulier : Question et Answer sont liés de 2 manières différentes!
 // en effet, il y a aussi "la bonne réponse" !
-Question.belongsTo(Answer, {
+/* Question.belongsTo(Answer, {
   onDelete: 'cascade',
   hooks: true,
   foreignKey: 'answer_id',
   as: 'good_answer'
-});
+}); */
 
 
 // une question a un niveau
@@ -59,7 +59,7 @@ User.hasMany(Quiz, {
 // Question : "un Quiz possède plusieurs Questions"
 Quiz.hasMany(Question, {
   onDelete: 'cascade',
-  hooks: true,
+  /* hooks: true, */
   foreignKey: 'quiz_id',
   as: 'questions'
 });
@@ -85,6 +85,14 @@ Tag.belongsToMany(Quiz, {
   otherKey: 'quiz_id',
   foreignKey: 'tag_id',
 });
+
+const sequelize = require('../database');
+const init = async()=>{
+  await sequelize.sync({
+    /*force: true */ // le force oblige la recréation de la BDD et donc supprime les données
+  });
+};
+init();
 
 module.exports = {
   Answer,
