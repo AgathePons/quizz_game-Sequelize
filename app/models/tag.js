@@ -7,7 +7,8 @@ Tag.init({
   name: Sequelize.STRING
 },{
   sequelize,
-  tableName: 'tag'
+  tableName: 'new_tag'
 });
 
+// on exporte la class directement !
 module.exports = Tag;

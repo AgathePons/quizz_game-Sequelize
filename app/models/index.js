@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Answer = require('./answer');
 const Level = require('./level');
 const Question = require('./question');
@@ -7,29 +9,17 @@ const User = require('./user');
 
 // une question a plusieurs answers
 Question.hasMany(Answer, {
-  onDelete: 'cascade',
-  hooks: true,
   foreignKey: 'question_id',
-  as: 'answers'
+  as: 'answers',
+  onDelete: 'cascade'
 });
 
 // réciproque : une answer est lié à une seule question
 Answer.belongsTo(Question, {
-  onDelete: 'cascade',
-  hooks: true,
   foreignKey: 'question_id',
-  as: 'question'
+  as: 'question',
+  onDelete: 'cascade'
 });
-
-// ATTENTION cas particulier : Question et Answer sont liés de 2 manières différentes!
-// en effet, il y a aussi "la bonne réponse" !
-Question.belongsTo(Answer, {
-  onDelete: 'cascade',
-  hooks: true,
-  foreignKey: 'answer_id',
-  as: 'good_answer'
-});
-
 
 // une question a un niveau
 Question.belongsTo(Level, {
@@ -58,10 +48,9 @@ User.hasMany(Quiz, {
 
 // Question : "un Quiz possède plusieurs Questions"
 Quiz.hasMany(Question, {
-  onDelete: 'cascade',
-  hooks: true,
   foreignKey: 'quiz_id',
-  as: 'questions'
+  as: 'questions',
+  onDelete: 'cascade'
 });
 // et la réciproque: "une Question appartient à un seul Quiz"
 Question.belongsTo(Quiz, {
@@ -74,17 +63,25 @@ Question.belongsTo(Quiz, {
 // "Un Quiz possède plusieurs tags"
 Quiz.belongsToMany(Tag, {
   as: 'tags', // alias de l'association 
-  through: 'quiz_has_tag', // "via la table de liaison qui s'appelle ..."
+  through: 'new_quiz_has_tag', // "via la table de liaison qui s'appelle ..."
   foreignKey: 'quiz_id', // le nom de la clef de Quiz dans la table de liaison
   otherKey: 'tag_id', // le nom de la clef de "l'autre" (donc Tag)
 });
 // ... et la réciproque !
 Tag.belongsToMany(Quiz, {
   as: 'quizList',
-  through: 'quiz_has_tag',
+  through: 'new_quiz_has_tag',
   otherKey: 'quiz_id',
   foreignKey: 'tag_id',
 });
+
+const sequelize = require('../database');
+const init = async () => {
+  await sequelize.sync({
+    //force: true // le force oblige la suppression puis la création de la BDD et donc supprime les données
+  });
+};
+init(); // pour lancer la création de la BDD depuis Sequelize
 
 module.exports = {
   Answer,

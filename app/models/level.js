@@ -16,7 +16,7 @@ Level.init({
 },{
   // le 2ème paramètre contient les options de connections
   sequelize, // le connecteur
-  tableName: 'level' // nom de la table
+  tableName: 'new_level', // nom de la table
 });
 
 // on exporte la class directement !

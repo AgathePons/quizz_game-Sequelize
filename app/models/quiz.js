@@ -10,7 +10,7 @@ Quiz.init({
   description: Sequelize.STRING
 },{
   sequelize,
-  tableName: 'quiz'
+  tableName: 'new_quiz'
 });
 
 module.exports = Quiz;
