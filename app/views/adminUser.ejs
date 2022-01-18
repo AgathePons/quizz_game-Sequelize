@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<main class="container">
+
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4">Page d'administration des users</h2>
+  </div>
+
+  <div class="row">
+
+    <% for(const user of allUsers){%>
+    <div class="col-4">
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5 class="mb-2 card-title d-flex">
+            <%= user.firstname %> <%= user.lastname %>
+            <span class="ml-2 badge badge-<%= user.role == 'admin' ? 'success' : 'secondary' %>">
+              <%= user.role %>
+            </span>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">Email : <%= user.email %></h6>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/admin/user/<%= user.id %>/user" type="button" class="btn btn-primary text-white">User</a>
+            <a href="/admin/user/<%= user.id %>/admin" type="button" class="btn btn-success text-white">Admin</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+  </div>
+</main>
+<%- include('partials/footer') %>

@@ -21,7 +21,10 @@ router.get('/login', userController.loginPage);
 router.post('/login', userController.postLogin);
 router.get('/logout', userController.logout);
 
-router.get('/admin', adminController.adminPage);
-router.get('/admin/quiz/delete/:id', adminController.deleteQuiz);
+router.get('/admin',middleware.isAdmin, adminController.adminQuizPage);
+router.get('/admin/quiz/delete/:id',middleware.isAdmin, adminController.deleteQuiz);
+router.get('/admin/users',middleware.isAdmin, adminController.adminUserPage);
+router.get('/admin/user/:id/user',middleware.isAdmin, adminController.setRoleUser);
+router.get('/admin/user/:id/admin',middleware.isAdmin, adminController.setRoleAdmin);
 
 module.exports = router;
