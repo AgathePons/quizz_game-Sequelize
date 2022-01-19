@@ -24,7 +24,6 @@ router.get('/logout', userController.logout);
 router.get('/admin',middleware.isAdmin, adminController.adminQuizPage);
 router.get('/admin/quiz/delete/:id',middleware.isAdmin, adminController.deleteQuiz);
 router.get('/admin/users',middleware.isAdmin, adminController.adminUserPage);
-router.get('/admin/user/:id/user',middleware.isAdmin, adminController.setRoleUser);
-router.get('/admin/user/:id/admin',middleware.isAdmin, adminController.setRoleAdmin);
+router.get('/admin/user/:id/:role',middleware.isAdmin, adminController.setRole);
 
 module.exports = router;

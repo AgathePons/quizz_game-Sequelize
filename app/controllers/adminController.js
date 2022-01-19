@@ -47,30 +47,19 @@ const adminController = {
       allUsers
     });
   },
-  async setRoleUser(req, res) {
+  async setRole(req, res) {
+    const role = req.params.role;
     const userId = req.params.id;
     try {
       const user = await User.findByPk(userId);
-      user.role = 'user';
+      user.role = role;
       await user.save();
     } catch(err) {
-      console.log('ADMIN USER TO USER =>', err);
+      console.log('ADMIN USER TO ROLE =>', err);
       //res.status(500).send(err);
     }
     res.redirect('/admin/users');
   },
-  async setRoleAdmin(req, res) {
-    const userId = req.params.id;
-    try {
-      const user = await User.findByPk(userId);
-      user.role = 'admin';
-      await user.save();
-    } catch(err) {
-      console.log('ADMIN USER TO ADMIN =>', err);
-      //res.status(500).send(err);
-    }
-    res.redirect('/admin/users');
-  }
 };
 
 module.exports = adminController;
