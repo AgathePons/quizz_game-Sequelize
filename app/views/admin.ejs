@@ -5,7 +5,7 @@
   <p class="lead">Espace permettant de gérer les quizzes !</p>
 </div>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-12">
     <h3>Ajouter un tag</h3>
     <form action="" method="POST">
@@ -24,7 +24,7 @@
     <div class="row">
       <% for (let tag of tags) { %>
         <div class="col-3 p-4 text-center">
-          <a class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" href="/quizzes/tag/<%= tag.id %>">
+          <a class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" href="/admin/tag_edit/<%= tag.id %>">
               <%= tag.name %>
           </a>
         </div>

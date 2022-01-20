@@ -39,5 +39,7 @@ router.get('/profile', userController.profilePage);
 // admin
 router.get('/admin', adminMiddleware, adminController.adminPage);
 router.post('/admin', adminController.addTag);
+router.get('/admin/tag_edit/:id', adminMiddleware, adminController.editTagPage);
+router.post('/admin/tag_edit/:id', adminController.editTagPost);
 
 module.exports = router;
