@@ -40,7 +40,11 @@
   color: #dc3545;
 }
 
-.tag {}
+.tag {
+  color: #fbff00;
+  background-color: #e213b5;
+  border-color: #b200f8;
+}
 
 .tag--cinéma {
   color: #004085;
