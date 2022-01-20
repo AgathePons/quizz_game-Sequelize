@@ -12,13 +12,35 @@ const quizzController = {
           { association: 'tags'}
         ]
       });
-      res.render('quiz', {quiz});
+      if(res.locals.user) {
+        res.render('play_quiz', {quiz});
+      } else {
+        res.render('quiz', {quiz});
+      }
     } catch (err) {
       console.trace(err);
       res.status(500).send(err);
     }
   },
-
+  validateQuiz: async (req, res) => {
+    try {
+      const quizId = parseInt(req.params.id);
+      const quizForm = req.body;
+      //!
+      console.log(quizForm);
+      const quiz = await Quiz.findByPk(quizId,{
+        include: [
+          { association: 'author'},
+          { association: 'questions', include: ['answers', 'level']},
+          { association: 'tags'}
+        ]
+      });
+      res.render('play_quiz', {quiz});
+    } catch (err) {
+      console.trace(err);
+      res.status(500).send(err);
+    }
+  },
   listByTag: async (req, res) => {
     // plutot que de faire une requete compliquée
     // on va passer par le tag, et laisser les relations de Sequelize faire le taf !
