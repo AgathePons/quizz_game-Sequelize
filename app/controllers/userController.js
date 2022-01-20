@@ -20,20 +20,20 @@ const userController = {
       });
       if (user) {
         return res.render('signup', {
-          error: "Cet email est déjà utilisé par un utilisateur."
+          error: 'Cet email est déjà utilisé par un utilisateur.'
         });
       }
       // - 2: format d'email valide
       if (!emailValidator.validate(req.body.email)) {
         return res.render('signup', {
-          error: "Cet email n'est pas valide."
+          error: 'Cet email n\'est pas valide.'
         });
       }
 
       // - 3: le mdp et la confirmation ne correspondent pas
       if (req.body.password !== req.body.passwordConfirm) {
         return res.render('signup', {
-          error: "La confirmation du mot de passe ne correspond pas."
+          error: 'La confirmation du mot de passe ne correspond pas.'
         });
       }
       // - 4: Si on avait le courage, vérifier que le mdp répond aux recommendations CNIL...
@@ -74,7 +74,7 @@ const userController = {
       });
       if (!user) {
         return res.render('login', {
-          error: "Cet email n'existe pas."
+          error: 'Cet email n\'existe pas.'
         });
       }
 
@@ -82,7 +82,7 @@ const userController = {
       const validPwd = await bcrypt.compare(req.body.password, user.password);
       if (!validPwd) {
         return res.render('login', {
-          error: "Ce n'est pas le bon mot de passe."
+          error: 'Ce n\'est pas le bon mot de passe.'
         });
       }
 
