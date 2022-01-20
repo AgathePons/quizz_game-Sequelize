@@ -18,4 +18,19 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-12">
+    <h3>Modifier un tag</h3>
+    <div class="row">
+      <% for (let tag of tags) { %>
+        <div class="col-3 p-4 text-center">
+          <a class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" href="/quizzes/tag/<%= tag.id %>">
+              <%= tag.name %>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
 <%- include('partials/footer') %>

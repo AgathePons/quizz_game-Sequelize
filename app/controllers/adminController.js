@@ -1,8 +1,15 @@
 const { Tag } = require('../models');
 
 const adminController = {
-  adminPage: (req, res) => {
-    res.render('admin');
+  adminPage: async (req, res) => {
+    try {
+      const tags = await Tag.findAll();
+      res.render('admin', {tags});
+    } catch (err) {
+      console.trace(err);
+      res.status(500).send(err);
+    }
+    
   },
   addTag: async (req, res) => {
     //!
