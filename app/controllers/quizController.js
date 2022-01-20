@@ -22,12 +22,10 @@ const quizzController = {
       res.status(500).send(err);
     }
   },
+  // results of quiz validation form
   validateQuiz: async (req, res) => {
     try {
       const quizId = parseInt(req.params.id);
-      const quizForm = req.body;
-      //!
-      console.log(quizForm);
       const quiz = await Quiz.findByPk(quizId,{
         include: [
           { association: 'author'},
@@ -35,7 +33,34 @@ const quizzController = {
           { association: 'tags'}
         ]
       });
-      res.render('play_quiz', {quiz});
+      // check results
+      let counter = 0;
+      const quizForm = req.body;
+      const userAnswers = Object.values(quizForm);
+      //!
+      console.table(userAnswers);
+      for(let i = 0; i < quiz.questions.length; i++) {
+        const goodAnswerId = quiz.questions[i].answer_id;
+        const userAnswer = userAnswers[i];
+        //!
+        console.log('question', quiz.questions[i].question);
+        console.log('good answer:', goodAnswerId);
+        console.log('user answer:', userAnswer);
+        if(goodAnswerId === Number(userAnswer)) {
+          counter++;
+          quiz.questions[i].isUserRight = true;
+        } else {
+          quiz.questions[i].isUserRight = false;
+        }
+        //!
+        console.log('---FINALLY:', quiz.questions[i].isUserRight);
+      }
+
+      res.render('quiz_results', {
+        quiz,
+        userAnswers,
+        counter
+      });
     } catch (err) {
       console.trace(err);
       res.status(500).send(err);

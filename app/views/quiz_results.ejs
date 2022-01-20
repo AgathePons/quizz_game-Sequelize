@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+<h2 class="h1 display-4">Bravo ! Tu as fait <%= counter %>/<%= quiz.questions.length %> point(s) ! 😄</h2>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4"><%= quiz.title %></h2>
+    <p class="lead"><%= quiz.description %></p>
+    <p class="font-weight-bold">par <%= quiz.author.fullname %></p>
+    <p class="lead"><%= quiz.questions.length %> questions</p>
+</div>
+
+<div class="row">
+
+    <% for (let tag of quiz.tags) { %>
+    <div class="col-3 p-4 text-center">
+        <a class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" href="/quizzes/tag/<%= tag.id %>">
+            <%= tag.name %>
+        </a>
+    </div>
+    <% } %>
+
+</div>
+
+<div class="row">
+
+    <% for(let i = 0; i < quiz.questions.length; i++) { %>
+
+    <div class="col-12">
+        <label class="badge level level--<%= quiz.questions[i].level.name.toLowerCase() %>">
+            <%= quiz.questions[i].level.name %>
+        </label>
+        <h4>
+            <%= quiz.questions[i].question %>
+        </h4>
+        <ul class="list-group">
+            <% for(let index in quiz.questions[i].answers){ %>
+
+            <li class="list-group-item 
+            <% if(quiz.questions[i].answer_id == quiz.questions[i].answers[index].id) { %>
+                bg-success
+            <% } %>">
+                <%= parseInt(index) + 1 %>. <%= quiz.questions[i].answers[index].description %>
+
+                <% if((quiz.questions[i].answers[index].id == userAnswers[i]) && (quiz.questions[i].isUserRight === true)) { %>
+                <span class="badge badge-success">Bonne réponse</span>
+
+                <% } else if((quiz.questions[i].answers[index].id == userAnswers[i]) && (quiz.questions[i].isUserRight === false)) { %>
+                <span class="badge badge-danger">Mauvaise réponse</span>
+                <% } %>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+    <% } %>
+
+</div>
+
+<%- include('partials/footer') %>
