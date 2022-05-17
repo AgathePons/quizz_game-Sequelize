@@ -9,15 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/O-clock-FS-JS/OQuizz.git"
+    "url": "git+https://github.com/AgathePons/quizz_game-Sequelize.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/O-clock-FS-JS/OQuizz/issues"
-  },
-  "homepage": "https://github.com/O-clock-FS-JS/OQuizz#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
